@@ -1,14 +1,12 @@
 {
-  "name": "admin-dashboard-astro",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "astro-site",
+  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "npx astro build",
-    "prepare": "chmod +x node_modules/.bin/astro"
+    "build": "astro build",
+    "preview": "astro preview"
   },
-  "devDependencies": {
-    "astro": "^4.16.19"
+  "dependencies": {
+    "astro": "^4.0.0"
   }
 }
