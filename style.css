@@ -1,0 +1,171 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+}
+section{
+    width: 100%;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.dash-top{
+    width: 100%;
+    padding-block: 2rem;
+}
+.dash-top > .top{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.date p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+}
+.bottom{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.greet-search{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+}
+.greet-search h1{
+    font-size: 4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    padding-block: 2rem;
+}
+.search{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    background-color: #010101;
+    border-radius: 8px;
+    padding-left: 1rem;
+}
+svg{
+    width: 30px;
+    fill: #F5F5F5;
+}
+.search input{
+    width: 100%;
+    padding: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #F5F5F5;
+}
+.search input::placeholder{
+    color: #F5F5F5;
+}
+.employee-count{
+    width: 30%;
+}
+.employee-count p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+}
+.employee-count h3{
+    font-size: 3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+.profile-wrap{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+}
+.profile-card{
+    width: 100%;
+    background-color: #e7e7e7;
+    padding: 1rem;
+}
+.profile-card .photo{
+    width: 100%;
+    height: 20rem;
+}
+.profile-card .photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.flex-two-col{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: 1rem;
+}
+.info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.dots{
+    width: 5px;
+    height: 5px;
+    background-color: #010101;
+    border-radius: 100%;
+}
+.info h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+}
+.info h4{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: #5b5b5b;
+}
+.details{
+    display: flex;
+    justify-content: space-between;
+    padding-top:1rem;
+    padding-bottom: 2rem;
+}
+.details .right, .details .left{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.details .left > p , .details .right > p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.details .left > p:nth-of-type(2) , .details .right > p:nth-of-type(2){
+    font-size: 1.5rem;
+}
+.button{
+    width: 100%;
+    background-color: #010101;
+    display: flex;
+    align-items: center;
+    padding-block: 1rem;
+    border-radius: 8px;
+}
+.button a{
+    width: 100%;
+    
+    color: #F5F5F5;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    text-align: center;
+}

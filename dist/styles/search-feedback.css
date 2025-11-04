@@ -1,0 +1,120 @@
+.no-results {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #5b5b5b;
+  grid-column: 1 / -1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* When js adds .searching class and no cards are visible */
+.profile-wrap.searching .no-results {
+  opacity: 1;
+  visibility: visible;
+}
+.profile-wrap.searching .profile-card:not([style*="display: none"]) ~ .no-results {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Modal styles */
+.employee-modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.employee-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+.employee-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 1, 1, 0.75);
+  transition: background-color 0.3s ease;
+}
+.employee-modal__dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 20px));
+  opacity: 0;
+  background: #F5F5F5;
+  color: #010101;
+  max-width: 720px;
+  width: calc(100% - 2rem);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 40px rgba(1, 1, 1, 0.2);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.employee-modal.open .employee-modal__dialog {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+.employee-modal__close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: #010101;
+  color: #F5F5F5;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.employee-modal__close:hover {
+  transform: scale(1.1);
+  background-color: #2a2a2a;
+}
+.employee-modal__content {
+  font-family: Arial, Helvetica, sans-serif;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+.employee-modal__content h2 {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: normal;
+  color: #010101;
+}
+.employee-modal__content ul {
+  margin: 1rem 0 0 1.25rem;
+  color: #5b5b5b;
+  line-height: 1.6;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+@media (max-width: 640px) {
+  .employee-modal__dialog {
+    width: calc(100% - 1rem);
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  .employee-modal__close {
+    right: 8px;
+    top: 8px;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  
+  .employee-modal__content {
+    padding: 0.25rem;
+  }
+}

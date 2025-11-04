@@ -1,0 +1,39 @@
+---
+export interface Props {
+  name: string;
+  role?: string;
+  hiredDate?: string;
+  status?: string;
+  image?: string;
+}
+const { name, role = '', hiredDate = '', status = '', image = '/assets/bave-pictures-aqWtuTUMiu4-unsplash.jpg' } = Astro.props;
+---
+<div class="profile-card">
+  <div class="photo">
+    <img src={image} alt={name} />
+  </div>
+  <div class="info">
+    <div class="flex-two-col">
+      <h3>{name}</h3>
+      <h4>{role}</h4>
+    </div>
+    <div class="menu">
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <div class="dots"></div>
+    </div>
+  </div>
+  <div class="details">
+    <div class="left">
+      <p>Hired Date</p>
+      <p>{hiredDate}</p>
+    </div>
+    <div class="right">
+      <p>Status</p>
+      <p>{status}</p>
+    </div>
+  </div>
+  <div class="button">
+    <a href="#">VIEW DETAILED INFO</a>
+  </div>
+</div>

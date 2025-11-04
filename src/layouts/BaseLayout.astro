@@ -1,0 +1,18 @@
+---
+// Base layout: includes the global stylesheet from /style.css
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/styles/search-feedback.css" />
+  </head>
+  <body>
+    <slot />
+    <script src="/scripts/datetime.js" is:inline></script>
+    <script type="module" src="/scripts/search.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Search from '../components/Search.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+
+// Employee data will be loaded client-side from /data/employees.json
+---
+<BaseLayout>
+  <section>
+    <div class="container">
+      <div class="dash-top">
+        <div class="top">
+          <div class="date" aria-label="Current date and time">
+            <p aria-label="Current time">--:--</p>
+            <p aria-label="Current date">--/--/--</p>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="greet-search">
+            <h1>Welcome, <strong>Admin</strong></h1>
+            <Search />
+          </div>
+          <div class="employee-count">
+            <p>You Have</p>
+            <h3><strong>20</strong> Employees</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-wrap">
+        <!-- Profile cards will be rendered client-side from /data/employees.json -->
+      </div>
+    </div>
+  </section>
+</BaseLayout>
