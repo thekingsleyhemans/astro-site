@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "npx astro build",
+    "prepare": "chmod +x node_modules/.bin/astro"
   },
   "devDependencies": {
     "astro": "^4.16.19"
