@@ -2,6 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout>
+  <style>
+    @import '/login.css';
+    
+    input[type="email"] {
+      padding: 1.5rem;
+      outline: none;
+      border: none;
+      color: rgb(11, 11, 11);
+      font-size: 1.2rem;
+    }
+    
+    .message {
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+  </style>
   <main>
     <section>
       <div class="container">
