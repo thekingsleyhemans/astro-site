@@ -20,5 +20,22 @@ import AddEmployeeModal from '../components/AddEmployeeModal.astro';
     <script type="module" src="/scripts/search.js" defer></script>
     <!-- Production: Use real Firebase auth toolbar -->
     <script type="module" src="/scripts/floating-toolbar.js" defer></script>
+    <!-- Debug: load test toolbar when visiting with ?debugToolbar=1 -->
+    <script>
+      (function(){
+        try {
+          const p = new URLSearchParams(location.search);
+          if (p.get('debugToolbar') === '1') {
+            const s = document.createElement('script');
+            s.type = 'module';
+            s.src = '/scripts/floating-toolbar-test.js';
+            document.head.appendChild(s);
+            console.log('Debug toolbar loaded via ?debugToolbar=1');
+          }
+        } catch (e) {
+          console.warn('Debug toolbar loader error', e);
+        }
+      })();
+    </script>
   </body>
 </html>
