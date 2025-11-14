@@ -1,0 +1,338 @@
+---
+---
+<!-- Add Employee Modal -->
+<div id="addEmployeeModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Add Employee</h2>
+      <button id="closeModal" class="close-btn">&times;</button>
+    </div>
+    <form id="addEmployeeForm">
+      <div class="form-group">
+        <label for="employeeName">Full Name *</label>
+        <input 
+          type="text" 
+          id="employeeName" 
+          placeholder="e.g., John Doe" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="employeeAge">Age *</label>
+        <input 
+          type="number" 
+          id="employeeAge" 
+          placeholder="e.g., 28" 
+          min="18" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="employeeGhanaCard">Ghana Card Number *</label>
+        <input 
+          type="text" 
+          id="employeeGhanaCard" 
+          placeholder="e.g., GHA-123-456-789" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="employeeStatus">Employment Status *</label>
+        <select id="employeeStatus" required>
+          <option value="">-- Select Status --</option>
+          <option value="Hireable">Hireable</option>
+          <option value="Employed">Employed</option>
+          <option value="Misconduct">Misconduct</option>
+          <option value="Theft">Theft</option>
+          <option value="On Leave">On Leave</option>
+          <option value="Terminated">Terminated</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="employeeImage">Profile Image (Optional)</label>
+        <input 
+          type="file" 
+          id="employeeImage" 
+          accept="image/*"
+        >
+      </div>
+
+      <div id="formMessage" class="form-message"></div>
+
+      <div class="form-actions">
+        <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary">Add Employee</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  display: none;
+  font-size: 0.9rem;
+}
+
+.form-message.error {
+  display: block;
+  background: #fee;
+  color: #c33;
+  border: 1px solid #fcc;
+}
+
+.form-message.success {
+  display: block;
+  background: #efe;
+  color: #3c3;
+  border: 1px solid #cfc;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-primary,
+.btn-secondary {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+
+.btn-secondary {
+  background: #eee;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</style>
+
+<script type="module">
+  import { auth } from '/scripts/auth.js';
+  import { createEmployee } from '/scripts/db.js';
+  import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+  const modal = document.getElementById('addEmployeeModal');
+  const form = document.getElementById('addEmployeeForm');
+  const closeBtn = document.getElementById('closeModal');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const formMessage = document.getElementById('formMessage');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  let currentUser = null;
+
+  // Check auth state
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+  });
+
+  // Open modal when "Add Employee" is clicked (handled in floating-toolbar.js)
+  window.openAddEmployeeModal = () => {
+    modal.style.display = 'flex';
+  };
+
+  // Close modal
+  const closeAddEmployeeModal = () => {
+    modal.style.display = 'none';
+    form.reset();
+    formMessage.textContent = '';
+    formMessage.className = 'form-message';
+  };
+
+  closeBtn.addEventListener('click', closeAddEmployeeModal);
+  cancelBtn.addEventListener('click', closeAddEmployeeModal);
+
+  // Close modal when clicking outside
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeAddEmployeeModal();
+    }
+  });
+
+  // Handle form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!currentUser) {
+      showMessage('You must be logged in to add an employee', 'error');
+      return;
+    }
+
+    // Get form values
+    const name = document.getElementById('employeeName').value.trim();
+    const age = parseInt(document.getElementById('employeeAge').value);
+    const ghanaCard = document.getElementById('employeeGhanaCard').value.trim();
+    const status = document.getElementById('employeeStatus').value;
+    const imageFile = document.getElementById('employeeImage').files[0];
+
+    // Validation
+    if (!name || !age || !ghanaCard || !status) {
+      showMessage('Please fill in all required fields', 'error');
+      return;
+    }
+
+    if (age < 18) {
+      showMessage('Employee must be at least 18 years old', 'error');
+      return;
+    }
+
+    // Disable submit button during processing
+    submitBtn.disabled = true;
+    showMessage('Adding employee...', 'success');
+
+    try {
+      // Prepare employee data
+      const employeeData = {
+        ownerId: currentUser.uid,
+        ownerDisplayName: currentUser.displayName || currentUser.email,
+        name,
+        age,
+        ghanaCard,
+        status,
+        imageUrl: '', // Firebase Storage upload would go here
+      };
+
+      // Create employee in Firestore
+      const employeeId = await createEmployee(employeeData);
+      console.log('Employee added:', employeeId);
+
+      showMessage('Employee added successfully!', 'success');
+      form.reset();
+
+      // Close modal after 1.5 seconds
+      setTimeout(() => {
+        closeAddEmployeeModal();
+        // Optionally refresh the dashboard if they're on it
+        window.location.reload(); // Or dispatch custom event to refresh employee list
+      }, 1500);
+
+    } catch (error) {
+      console.error('Error adding employee:', error);
+      showMessage(`Error: ${error.message}`, 'error');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  function showMessage(msg, type) {
+    formMessage.textContent = msg;
+    formMessage.className = `form-message ${type}`;
+  }
+</script>

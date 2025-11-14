@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <main>
+    <section>
+      <div class="container">
+        <h2>All Workers (Public)</h2>
+        <div id="allEmployees" class="profile-wrap"></div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/scripts/auth.js"></script>
+  <script type="module" src="/scripts/db.js"></script>
+  <script type="module">
+    import { auth } from '/scripts/auth.js';
+    import { getAllEmployees } from '/scripts/db.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+    const container = document.getElementById('allEmployees');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = '/login';
+        return;
+      }
+      const employees = await getAllEmployees();
+      container.innerHTML = employees.map(emp => `
+        <div class="employee-card">
+          <h3>${emp.name}</h3>
+          <p>Age: ${emp.age}</p>
+          <p>Ghana Card: ${emp.ghanaCard}</p>
+          <p>Status: ${emp.status}</p>
+        </div>
+      `).join('');
+    });
+  </script>
+</BaseLayout>

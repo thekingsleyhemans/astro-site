@@ -1,5 +1,7 @@
 ---
 // Base layout: includes the global stylesheet from /style.css
+import FloatingToolbar from '../components/FloatingToolbar.astro';
+import AddEmployeeModal from '../components/AddEmployeeModal.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -12,7 +14,11 @@
   </head>
   <body>
     <slot />
+    <FloatingToolbar />
+    <AddEmployeeModal />
     <script src="/scripts/datetime.js" is:inline></script>
     <script type="module" src="/scripts/search.js" defer></script>
+    <!-- Production: Use real Firebase auth toolbar -->
+    <script type="module" src="/scripts/floating-toolbar.js" defer></script>
   </body>
 </html>

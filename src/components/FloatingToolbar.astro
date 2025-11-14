@@ -1,0 +1,35 @@
+---
+---
+<div id="floatingToolbar" class="floating-toolbar" style="display:none;">
+  <button id="ft-add-employee" title="Add Employee">Add Employee</button>
+  <button id="ft-my-employees" title="My Employees">My Employees</button>
+  <button id="ft-all-employees" title="All Workers">All Workers</button>
+  <button id="ft-logout" title="Logout">Logout</button>
+</div>
+
+<style>
+.floating-toolbar {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  background: var(--card-bg, #fff);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 8px;
+  display:flex;
+  gap:8px;
+  z-index: 9999;
+}
+.floating-toolbar button {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.floating-toolbar button:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+</style>
